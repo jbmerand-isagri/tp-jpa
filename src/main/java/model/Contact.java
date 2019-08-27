@@ -3,14 +3,12 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 // utiliser au maximum javax.persistence plutôt que hibernate pour éviter adhérence
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,8 +25,7 @@ public class Contact implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date birth;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "address_id") // correspond au nom de colonne qui resprésente la clé étrangère de l'adresse
+	@Embedded
 	private Address mainAddress;
 
 	/**

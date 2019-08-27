@@ -1,28 +1,21 @@
 package model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
-@Entity
+@Embeddable
 public class Address implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "N")
 	private Long id;
 	private String number;
 	private String street;
+	@Column(length = 5)
 	private String zip;
+	@Column(name = "ville", unique = true)
 	private String city;
-
-	@OneToMany(mappedBy = "mainAddress")
-	Set<Contact> contacts;
 
 	/**
 	 * Constructor
@@ -30,7 +23,6 @@ public class Address implements Serializable {
 	 */
 	public Address() {
 		super();
-		contacts = new HashSet<>();
 	}
 
 	/**
@@ -137,24 +129,6 @@ public class Address implements Serializable {
 	 */
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	/**
-	 * Getter
-	 * 
-	 * @return the contacts
-	 */
-	public Set<Contact> getContacts() {
-		return contacts;
-	}
-
-	/**
-	 * Setter
-	 * 
-	 * @param contacts the contacts to set
-	 */
-	public void setContacts(Set<Contact> contacts) {
-		this.contacts = contacts;
 	}
 
 	@Override
